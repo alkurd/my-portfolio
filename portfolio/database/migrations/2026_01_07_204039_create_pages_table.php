@@ -13,10 +13,15 @@ return new class extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->longText('content');
+            $table->string('seo_title')->nullable();
+            $table->string('seo_description')->nullable();
+            $table->enum('status', ['draft', 'published'])->default('draft');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */
